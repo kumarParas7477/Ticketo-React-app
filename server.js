@@ -14,7 +14,7 @@ const port = process.env.PORT || 3001;
 //   res.sendFile("./Data.json", { root: __dirname });
 // });
 const dataPath = "./Data.json";
-+app.get("/*", function(req, res) {
+app.get("/events", function(req, res) {
   fs.readFile(dataPath, "utf8", (err, data) => {
     if (err) {
       throw err;
