@@ -5,7 +5,7 @@ const cors = require("cors");
 var fs = require("fs");
 app.use(cors());
 const axios = require("axios");
-const port = process.env.PORT || 5001;
+const port = process.env.PORT || 3001;
 // app.get("/events", (req, res) => {
 //   res.sendFile("./Data.json", { root: __dirname });
 // }
@@ -22,6 +22,11 @@ const dataPath = "./Data.json";
 
     res.send(JSON.parse(data));
   });
+});
+app.use(express.static(path.join(__dirname, "client/build")));
+// Anything that doesn't match the above, send back index.html
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname + "/client/build/index.html"));
 });
 
 app.listen(port, () => console.log(`listening at ${port}`));
