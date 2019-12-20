@@ -7,8 +7,9 @@ app.use(cors());
 const port = process.env.PORT || 5000;
 // app.get("/events", (req, res) => {
 //   res.sendFile("./Data.json", { root: __dirname });
-// });
+// }
+console.log(__dirname);
 +app.get("/events", function(req, res) {
-  res.sendFile("./Data.json", { root: __dirname });
+  res.sendFile("/Data.json", { root: __dirname });
 });
 app.listen(port);
