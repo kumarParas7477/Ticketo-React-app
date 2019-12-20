@@ -5,7 +5,7 @@ const cors = require("cors");
 var fs = require("fs");
 app.use(cors());
 const axios = require("axios");
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5001;
 // app.get("/events", (req, res) => {
 //   res.sendFile("./Data.json", { root: __dirname });
 // }
@@ -13,11 +13,15 @@ const port = process.env.PORT || 5000;
 // +app.get("/events", function(req, res) {
 //   res.sendFile("./Data.json", { root: __dirname });
 // });
+const dataPath = "./Data.json";
++app.get("/*", function(req, res) {
+  fs.readFile(dataPath, "utf8", (err, data) => {
+    if (err) {
+      throw err;
+    }
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(""));
-  +app.get("*", function(req, res) {
-    res.sendFile(path.join(__dirname, "", "Data.json"));
+    res.send(JSON.parse(data));
   });
-}
+});
+
 app.listen(port, () => console.log(`listening at ${port}`));
