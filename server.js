@@ -10,6 +10,6 @@ const port = process.env.PORT || 3001;
 // });
 
 +app.get("/events", function(req, res) {
-  res.sendFile("Data.json", { root: __dirname });
+  res.sendFile("./Data.json", { root: __dirname });
 });
 app.listen(port);
