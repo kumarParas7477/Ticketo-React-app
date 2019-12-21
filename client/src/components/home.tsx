@@ -406,7 +406,7 @@ class HomeComponent extends React.Component<RouteComponentProps, IEventState> {
               className="container"
               style={{ marginLeft: 100, borderBlockStyle: "dashed" }}
             >
-              <Typography variant="h2"> EVENTS </Typography>
+             
             </div>
             <div style={{ marginTop: 30 }}>
               <div>
