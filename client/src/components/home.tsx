@@ -32,12 +32,14 @@ interface IEventState {
   message: string;
   variation: "error" | "success" | "warning" | "info";
   confirmation: boolean;
+  flagForLogin: boolean;
 }
 const INITIAL_STATE: IEventState = {
+  flagForLogin: true,
   events: [],
   open: false,
   SnackOpen: false,
-  data: { id: 0, name: "", Date: "", location: "",img:"" },
+  data: { id: 0, name: "", Date: "", location: "", img: "" },
   walletConnector: null,
   connected: false,
   chainId: 1,
@@ -106,7 +108,7 @@ class HomeComponent extends React.Component<RouteComponentProps, IEventState> {
     this.setState({
       open: false,
       SnackOpen: false,
-      data: { id: 0, name: "", Date: "", location: "", img:"" },
+      data: { id: 0, name: "", Date: "", location: "", img: "" },
       walletConnector: null,
       connected: false,
       chainId: 1,
@@ -134,8 +136,8 @@ class HomeComponent extends React.Component<RouteComponentProps, IEventState> {
         .signPersonalMessage(msgParams)
         .then((result: any) => {
           this.state.box.private.remove("Ticket", () =>
-              this.setState({ ticket: "" })
-            )
+            this.setState({ ticket: "" })
+          );
           this.setState({
             message: "Thank You For Your Visit! ",
             variation: "success",
@@ -215,15 +217,16 @@ class HomeComponent extends React.Component<RouteComponentProps, IEventState> {
   };
 
   issueTicket = async () => {
-  await  this.state.box.private.set("Ticket", this.state.data.name ,()=>this.setState({
-    message: "Your Ticket to " + this.state.data.name + " has been booked",
-    variation: "success",
-    SnackOpen: true
-  }));
-    
+    await this.state.box.private.set("Ticket", this.state.data.name, () =>
+      this.setState({
+        message: "Your Ticket to " + this.state.data.name + " has been booked",
+        variation: "success",
+        SnackOpen: true
+      })
+    );
   };
 
-  VerifyTicket =async () => {
+  VerifyTicket = async () => {
     this.alreadyHaveTicket();
     if (this.state.connected === true) {
       if (this.state.gotProfile === false) {
@@ -233,9 +236,7 @@ class HomeComponent extends React.Component<RouteComponentProps, IEventState> {
           SnackOpen: true
         });
       } else if (this.state.ticket !== "") {
-       
-     await   this.confirmTicket(this.state.data.name);
-
+        await this.confirmTicket(this.state.data.name);
       } else {
         this.setState({
           message: "You dont have any tickets ",
@@ -289,10 +290,12 @@ class HomeComponent extends React.Component<RouteComponentProps, IEventState> {
         walletConnector.createSession().then(() => {
           // get uri for QR Code modal
           const uri = walletConnector.uri;
-
+          // WalletConnectQRCodeModal.close();
           // display QR Code modal
+          this.setState({ flagForLogin: false });
           WalletConnectQRCodeModal.open(uri, () => {
             console.log("QR Code Modal closed");
+            this.setState({ flagForLogin: true });
           });
           this.subscribeToEvents();
         });
@@ -397,12 +400,13 @@ class HomeComponent extends React.Component<RouteComponentProps, IEventState> {
 
   render() {
     return (
-      <div >
+      <div>
         <AppBarComponent
           account={this.state.address}
           login={this.connectToWallet}
           logout={this.disconnectWallet}
           verify={this.VerifyTicket}
+          flagForLogin={this.state.flagForLogin}
         />
         <div style={{ marginTop: 15 }}>
           {this.state.address !== "Login" && this.state.gotProfile === false ? (
@@ -418,23 +422,21 @@ class HomeComponent extends React.Component<RouteComponentProps, IEventState> {
               <Typography variant="h2"> EVENTS </Typography>
             </div>
             <div style={{ marginTop: 30 }}>
-              <div >
+              <div>
                 {this.state.events.map((data, key) => {
                   return (
-                    <div >
-                                    <EventCard
-                      name={data.name}
-                      location={data.location}
-                      date={data.Date}
-                      book={() => this.buy(data)}
-                      gotProfile={this.state.gotProfile}
-                      connected={this.state.connected}
-                      address={this.state.address}
-                      img = {data.img}
-                    />
-                    
+                    <div>
+                      <EventCard
+                        name={data.name}
+                        location={data.location}
+                        date={data.Date}
+                        book={() => this.buy(data)}
+                        gotProfile={this.state.gotProfile}
+                        connected={this.state.connected}
+                        address={this.state.address}
+                        img={data.img}
+                      />
                     </div>
-                    
                   );
                 })}
               </div>
