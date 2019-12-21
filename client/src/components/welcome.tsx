@@ -12,11 +12,11 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: "grey",
       border: "10px solid #000",
       boxShadow: theme.shadows[5],
-      padding: theme.spacing(4, 6, 6, 8)
-      //   [theme.breakpoints.down("sm")]: {
-      //     width: 300,
-      //     height: 650
-      //   }
+      padding: theme.spacing(4, 6, 6, 8),
+         [theme.breakpoints.down("sm")]: {
+          width: 300
+    
+        }
     }
   })
 );
