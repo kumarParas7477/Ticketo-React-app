@@ -118,7 +118,8 @@ class HomeComponent extends React.Component<RouteComponentProps, IEventState> {
       message: "",
       variation: "info",
       ticket: "",
-      gotProfile: false
+      gotProfile: false,
+      flagForLogin: true
     });
   };
 
@@ -288,10 +289,7 @@ class HomeComponent extends React.Component<RouteComponentProps, IEventState> {
     if (walletConnector) {
       if (!walletConnector.connected) {
         walletConnector.createSession().then(() => {
-          // get uri for QR Code modal
           const uri = walletConnector.uri;
-          // WalletConnectQRCodeModal.close();
-          // display QR Code modal
           this.setState({ flagForLogin: false });
           WalletConnectQRCodeModal.open(uri, () => {
             console.log("QR Code Modal closed");
@@ -329,18 +327,7 @@ class HomeComponent extends React.Component<RouteComponentProps, IEventState> {
         }
 
         this.onConnect(payload);
-        // const getConsent = () => {
-        //   return true;
-        // };
-
-        // // Close QR Code Modal
-        // WalletConnectQRCodeModal.close();
-        // // Get provided accounts and chainId
-        // const { accounts, chainId } = payload.params[0];
-        // sessionStorage.setItem("name", accounts);
-
-        // this.setState({accounts : accounts[0]});
-        // const seed = accounts[0]; // a hex encoded seed
+       
       }
     );
 
