@@ -58,6 +58,7 @@ interface IAppBarProps {
   login: () => void;
   logout: () => void;
   verify: () => void;
+  flagForLogin: boolean;
 }
 
 const AppBarComponent: React.FC<IAppBarProps> = (props: IAppBarProps) => {
@@ -100,7 +101,7 @@ const AppBarComponent: React.FC<IAppBarProps> = (props: IAppBarProps) => {
             color="inherit"
             onClick={e => props.verify()}
             disabled={verifyDisable()}
-          style={{ marginRight: 10 }}
+            style={{ marginRight: 10 }}
           >
             <strong style={{ color: "primary" }}>VERIFY_TICKET</strong>
           </Button>{" "}
@@ -111,6 +112,7 @@ const AppBarComponent: React.FC<IAppBarProps> = (props: IAppBarProps) => {
               variant="contained"
               color="inherit"
               onClick={e => props.login()}
+              disabled={!props.flagForLogin}
             >
               <strong style={{ color: "black" }}>{props.account}</strong>
             </Button>
