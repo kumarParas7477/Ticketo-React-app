@@ -187,7 +187,6 @@ class HomeComponent extends React.Component<RouteComponentProps, IEventState> {
             () => this.issueTicket()
           );
           this.handleClose();
-          console.log(result);
         })
         .catch((error: any) => {
           // Error returned when rejected
@@ -228,7 +227,7 @@ class HomeComponent extends React.Component<RouteComponentProps, IEventState> {
   };
 
   VerifyTicket = async () => {
-    this.alreadyHaveTicket();
+    await this.alreadyHaveTicket();
     if (this.state.connected === true) {
       if (this.state.gotProfile === false) {
         this.setState({
@@ -289,7 +288,10 @@ class HomeComponent extends React.Component<RouteComponentProps, IEventState> {
     if (walletConnector) {
       if (!walletConnector.connected) {
         walletConnector.createSession().then(() => {
+          // get uri for QR Code modal
           const uri = walletConnector.uri;
+          // WalletConnectQRCodeModal.close();
+          // display QR Code modal
           this.setState({ flagForLogin: false });
           WalletConnectQRCodeModal.open(uri, () => {
             console.log("QR Code Modal closed");
@@ -327,7 +329,18 @@ class HomeComponent extends React.Component<RouteComponentProps, IEventState> {
         }
 
         this.onConnect(payload);
-       
+        // const getConsent = () => {
+        //   return true;
+        // };
+
+        // // Close QR Code Modal
+        // WalletConnectQRCodeModal.close();
+        // // Get provided accounts and chainId
+        // const { accounts, chainId } = payload.params[0];
+        // sessionStorage.setItem("name", accounts);
+
+        // this.setState({accounts : accounts[0]});
+        // const seed = accounts[0]; // a hex encoded seed
       }
     );
 
@@ -405,9 +418,7 @@ class HomeComponent extends React.Component<RouteComponentProps, IEventState> {
             <div
               className="container"
               style={{ marginLeft: 100, borderBlockStyle: "dashed" }}
-            >
-             
-            </div>
+            ></div>
             <div style={{ marginTop: 30 }}>
               <div>
                 {this.state.events.map((data, key) => {
