@@ -19,9 +19,9 @@
  ###  just type **npm start** the backend consisting of Express will get start and concurrently react application.
    
 # 3Box USe :postbox:
-### 1. 3Box is generated for every new wallet.;
+### 1. 3Box is generated for every new wallet.
 ### 2. Unique Record fetching.
-### 3. I have used it for saving the ticket info for a particula user
+### 3. Used it for saving the ticket info for a particular user
 <hr>
 
 ## References
