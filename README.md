@@ -32,3 +32,7 @@
 ### :black_circle: WalletConnect/walletconnect-example-dapp :link: [https://github.com/WalletConnect/walletconnect-example-dapp]
 
 ### :black_circle: WalletConnect/walletconnect-monorepo :link: [https://github.com/WalletConnect/walletconnect-monorepo]
+
+## Future RoadMaps
+1. Optimizing UI and UX.
+2. Adding More functionality to Hosting and Maintaining Events.
