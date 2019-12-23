@@ -17,7 +17,8 @@ const useStyles = makeStyles((theme: Theme) =>
     card: {
       display: "flex",
       margin: 20,
-      border: "10px solid grey",
+      border: "5px solid grey",
+      borderRadius: "25px",
       Height: 200
     },
     details: {
