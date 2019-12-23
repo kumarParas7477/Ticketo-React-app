@@ -88,7 +88,7 @@ const AppBarComponent: React.FC<IAppBarProps> = (props: IAppBarProps) => {
   };
   return (
     <div className={classes.root}>
-      <AppBar position="relative" style={{ color: "green" }}>
+      <AppBar position="fixed" style={{ color: "green" }}>
         <Toolbar variant="dense">
           <Typography variant="h3" style={{ color: "black" }}>
             <strong>TICKETO!</strong>
