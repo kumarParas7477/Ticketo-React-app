@@ -299,6 +299,13 @@ class HomeComponent extends React.Component<RouteComponentProps, IEventState> {
           });
           this.subscribeToEvents();
         });
+      } else {
+        this.setState({
+          message:
+            "Please Check Your Internet Connection and refresh Window as we are unable to connect to servers",
+          variation: "info",
+          SnackOpen: true
+        });
       }
     }
   };
@@ -401,19 +408,32 @@ class HomeComponent extends React.Component<RouteComponentProps, IEventState> {
   render() {
     return (
       <div>
-        <AppBarComponent
-          account={this.state.address}
-          login={this.connectToWallet}
-          logout={this.disconnectWallet}
-          verify={this.VerifyTicket}
-          flagForLogin={this.state.flagForLogin}
-        />
-        <div style={{ marginTop: 15 }}>
-          {this.state.address !== "Login" && this.state.gotProfile === false ? (
-            <CircularIndeterminate />
-          ) : null}
+        <div>
+          <AppBarComponent
+            account={this.state.address}
+            login={this.connectToWallet}
+            logout={this.disconnectWallet}
+            verify={this.VerifyTicket}
+            flagForLogin={this.state.flagForLogin}
+          />
         </div>
-        <div style={{ marginTop: 20 }}>
+
+        {this.state.address !== "Login" && this.state.gotProfile === false ? (
+          <div
+            style={{
+              position: "fixed",
+              marginTop: 20,
+              marginBottom: 30,
+              left: "40%",
+              blockSize: 20
+            }}
+          >
+            {" "}
+            <CircularIndeterminate />
+          </div>
+        ) : null}
+
+        <div style={{ marginTop: 30 }}>
           <div className="col-md-12">
             <div
               className="container"
