@@ -24,6 +24,9 @@
 ### 3. Used it for saving the ticket info for a particular user
 <hr>
 
+# IMPORTANT INSTRUCTIONS
+### Connect when your Internet connection is Working Well.
+
 ## References
 ### :black_circle: Gitcoin :link: [https://gitcoin.co/issue/WalletConnect/walletconnect-monorepo/204/3767]
 
