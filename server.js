@@ -4,15 +4,9 @@ const path = require("path");
 const cors = require("cors");
 var fs = require("fs");
 app.use(cors());
-const axios = require("axios");
+
 const port = process.env.PORT || 3001;
-// app.get("/events", (req, res) => {
-//   res.sendFile("./Data.json", { root: __dirname });
-// }
-// console.log(__dirname);
-// +app.get("/events", function(req, res) {
-//   res.sendFile("./Data.json", { root: __dirname });
-// });
+
 const dataPath = "./Data.json";
 app.get("/events", function(req, res) {
   fs.readFile(dataPath, "utf8", (err, data) => {
