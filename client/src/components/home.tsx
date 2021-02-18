@@ -161,7 +161,7 @@ class HomeComponent extends React.Component<RouteComponentProps, IEventState> {
   transaction = async () => {
     const tx = {
       from: this.state.address, // Required
-      to: "0x4c6eb76d262cc6121843f74e1d18036adf03f1bf", // Required (for non contract deployments)
+      to: "0x3940CA172270b78432C7Df91f36ECb031ae25897", // Required (for non contract deployments)
       data: "0x", // Required
       value: "0x00",
       gasPrice: "2100", // Optional
